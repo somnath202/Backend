@@ -1,0 +1,2 @@
+import mailgen from 'mailgen'
+
