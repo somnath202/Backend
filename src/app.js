@@ -14,13 +14,16 @@ app.use(cors({
     methods:["GET" , "POST" , "PUT" , "PATCH" , "DELETE" , "OPTIONS"],
     allowedHeaders : ["Authorization","Content-Type"]
 }))
-
+ 
 //import the routes  
 import healthCheckRoute from './routes/healthcheck.routes.js'
+import authRouter from './routes/auth.routes.js'
 app.use('/api/v1/healthcheck',healthCheckRoute)
+app.use('/api/v1/auth',authRouter)
+
 
 app.get("/" , (req , res)=>{
     res.send("This is my first project")
 })
 
-export default app
+export default app    
