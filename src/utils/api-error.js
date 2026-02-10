@@ -5,7 +5,7 @@ class ApiError extends Error{
         error = [],
         stack = ""
     ){
-        super(message)
+        super(message) 
         this.statusCode = statusCode
         this.message = message
         this.error = error
@@ -20,4 +20,4 @@ class ApiError extends Error{
     }
 }
 
-export {ApiError}
+export {ApiError} 
