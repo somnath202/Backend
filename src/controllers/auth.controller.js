@@ -1,4 +1,4 @@
-import { User } from '../models/User.models.js'
+import { User } from '../models/user.models.js'
 import { ApiResponse } from '../utils/api-response.js'
 import { asyncHandler } from '../utils/async-handler.js'
 import { ApiError } from '../utils/api-error.js'
@@ -154,7 +154,12 @@ const loginUser = asyncHandler(async (req , res) => {
 
 })
 
+const logoutUser = asyncHandler(async (req,res)=>{
+
+})
+
 export {
     registerUser,
-    loginUser
+    loginUser,
+    logoutUser
 }
