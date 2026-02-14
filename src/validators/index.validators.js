@@ -42,7 +42,7 @@ const userLoginValidator = ()=>{
             .trim()
             .notEmpty()
             .withMessage("Password is required"),
-    ]
+    ] 
 }
 
 export {
