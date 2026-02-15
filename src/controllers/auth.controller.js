@@ -155,11 +155,83 @@ const loginUser = asyncHandler(async (req , res) => {
 })
 
 const logoutUser = asyncHandler(async (req,res)=>{
-
+    await User.findByIdAndUpdate(
+        req.user._id,
+        {
+            $set:{
+                refreshToken: ""
+            }
+        },
+        {
+            new : true 
+        },
+    );
+    const options = {
+        httpOnes:true,
+        secure:true,
+    }
+    return res 
+        .status(200)
+        .clearCookie("refreshToken",options)
+        .clearCookie("accessToken",options)
+        .json( new ApiResponse(200,{},"User logged out"))
 })
 
+const getCurrentUser = asyncHandler(async (req , res ) => { 
+    return res 
+        .status(200)
+        .json(new ApiResponse(
+            200,
+            req.user,
+            "Current user featched successfully"
+        ))
+})
+
+const verifyEmail = asyncHandler(async (req,res)=>{
+    const {verificationToken} = req.params
+
+    if(!verificationToken){
+        throw new ApiError(400,"Email verification token is missing")
+    }
+
+    let hashedToken = crypto
+        .createHash("sha256")
+        .update(verificationToken)
+        .digest("hex")
+
+    const user = await User.findOne({
+        emailVerificationToken : hashedToken,
+        emailVerificationExpiry : {$gt:Date.now()}
+    })
+
+    if(!user){
+        throw new ApiError(
+            400,
+            "Token is invalid or expiered"
+        )
+    }
+    user.emailVerificationToken = undefined
+    user.emailVerificationExpiry = undefined
+
+    user.isEmailVerified = true
+    await user.save({validateBeforeSave:false})
+
+    return res 
+        .status(200)
+        .json(
+            new ApiResponse(
+                200,
+                {
+                    isEmailVerified:true
+                },
+                "Email is verified"
+            )
+        )
+})
 export {
     registerUser,
     loginUser,
-    logoutUser
+    logoutUser,
+    getCurrentUser,
+    verifyEmail,
 }
