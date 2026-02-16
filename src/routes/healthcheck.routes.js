@@ -5,5 +5,5 @@ import { healthCheck } from '../controllers/healthcheck.controlllers.js'
 const router = Router()
 
 router.route("/").get(healthCheck)
-
+ 
 export default router

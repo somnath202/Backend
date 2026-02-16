@@ -54,7 +54,7 @@ const emailVerificationMailgenContent = (username , verificationURL)=>{
 
     }
 }
-
+ 
 
 
 const forgotPasswordMailgenContent = (username , passwordResetURL)=>{

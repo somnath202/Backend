@@ -5,5 +5,5 @@ const asyncHandler =(requestHandler)=> {
             .catch((e) => next(e))
     }
 }
-
+ 
 export {asyncHandler}

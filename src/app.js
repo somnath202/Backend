@@ -15,7 +15,7 @@ app.use(cors({
     credentials:true,
     methods:["GET" , "POST" , "PUT" , "PATCH" , "DELETE" , "OPTIONS"],
     allowedHeaders : ["Authorization","Content-Type"] 
-}))
+})) 
  
 //import the routes  
 import healthCheckRoute from './routes/healthcheck.routes.js'

@@ -13,5 +13,5 @@ router.route("/login").post(userLoginValidator() , validate, loginUser)
 router.route("/logout").post(verifyJWT , logoutUser)
 router.route("/getcurrentuser").post(getCurrentUser)
 
-
+ 
 export default router 
